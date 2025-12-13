@@ -10,6 +10,10 @@ import '../../../common/utils/utils.dart';
 import '../config/image_config.dart';
 import '../image_embed_types.dart';
 
+/// Cache for base64 image providers to prevent re-decoding on every rebuild.
+/// This significantly improves performance and prevents flickering.
+final Map<String, ImageProvider> _base64ImageProviderCache = {};
+
 String getImageStyleString(QuillController controller) {
   final String? s = controller
       .getAllSelectionStyles()
@@ -36,7 +40,11 @@ ImageProvider getImageProviderByImageSource(
   }
 
   if (isImageBase64(imageSource)) {
-    return MemoryImage(base64.decode(imageSource));
+    // Use cached provider to prevent re-decoding base64 on every rebuild
+    return _base64ImageProviderCache.putIfAbsent(
+      imageSource,
+      () => MemoryImage(base64.decode(imageSource)),
+    );
   }
 
   if (isHttpUrl(imageSource)) {
@@ -69,6 +77,8 @@ Image getImageWidgetByImageSource(
     height: height,
     alignment: alignment,
     errorBuilder: imageErrorWidgetBuilder,
+    // Prevents flickering when the widget rebuilds (e.g., on text changes)
+    gaplessPlayback: true,
   );
 }
 
