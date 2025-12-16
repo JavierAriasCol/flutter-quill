@@ -16,6 +16,7 @@ enum ExtraElementProperties {
   ElementSize elementSize,
   double? margin,
   Alignment alignment,
+  String? caption,
 ) getElementAttributes(
   Node node,
   BuildContext context,
@@ -23,6 +24,7 @@ enum ExtraElementProperties {
   var elementSize = const ElementSize(null, null);
   var elementAlignment = Alignment.center;
   double? elementMargin;
+  String? elementCaption;
 
   final heightValue = parseCssPropertyAsDouble(
     node.style.attributes[Attribute.height.key]?.value.toString() ?? '',
@@ -74,9 +76,12 @@ enum ExtraElementProperties {
     if (margin != null) {
       elementMargin = margin;
     }
+
+    // Extract caption from CSS attributes
+    elementCaption = cssAttrs['caption'];
   }
 
-  return (elementSize, elementMargin, elementAlignment);
+  return (elementSize, elementMargin, elementAlignment, elementCaption);
 }
 
 @immutable

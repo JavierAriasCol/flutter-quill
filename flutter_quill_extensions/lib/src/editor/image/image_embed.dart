@@ -24,7 +24,7 @@ class QuillEditorImageEmbedBuilder extends EmbedBuilder {
     EmbedContext embedContext,
   ) {
     final imageSource = standardizeImageUrl(embedContext.node.value.data);
-    final ((imageSize), margin, alignment) = getElementAttributes(
+    final ((imageSize), margin, alignment, caption) = getElementAttributes(
       embedContext.node,
       context,
     );
@@ -41,6 +41,37 @@ class QuillEditorImageEmbedBuilder extends EmbedBuilder {
       height: height,
       width: width,
     );
+
+    // Build the image with optional caption
+    Widget imageWithCaption = imageWidget;
+    if (caption != null && caption.isNotEmpty) {
+      // Decode the caption (it may be URL encoded to handle special chars)
+      final decodedCaption = Uri.decodeComponent(caption);
+      final screenWidth = MediaQuery.sizeOf(context).width;
+
+      imageWithCaption = Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          imageWidget,
+          Padding(
+            padding: EdgeInsets.only(
+              top: 8.0,
+              left: screenWidth * 0.15,
+              right: screenWidth * 0.15,
+            ),
+            child: Text(
+              decodedCaption,
+              style: const TextStyle(
+                fontSize: 13,
+                fontStyle: FontStyle.italic,
+              ),
+              textAlign: TextAlign.center,
+            ),
+          ),
+        ],
+      );
+    }
 
     return GestureDetector(
       onTap: () {
@@ -66,10 +97,10 @@ class QuillEditorImageEmbedBuilder extends EmbedBuilder {
           if (margin != null) {
             return Padding(
               padding: EdgeInsets.all(margin),
-              child: imageWidget,
+              child: imageWithCaption,
             );
           }
-          return imageWidget;
+          return imageWithCaption;
         },
       ),
     );
