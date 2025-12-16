@@ -33,7 +33,7 @@ class QuillEditorVideoEmbedBuilder extends EmbedBuilder {
       }
     }
 
-    final ((elementSize), margin, alignment) = getElementAttributes(
+    final ((elementSize), margin, alignment, _) = getElementAttributes(
       embedContext.node,
       context,
     );
