@@ -56,15 +56,17 @@ class QuillEditorImageEmbedBuilder extends EmbedBuilder {
           imageWidget,
           Padding(
             padding: EdgeInsets.only(
-              top: 8.0,
-              left: screenWidth * 0.15,
-              right: screenWidth * 0.15,
+              top: 12,
+              left: screenWidth * 0.13,
+              right: screenWidth * 0.13,
             ),
             child: Text(
               decodedCaption,
               style: const TextStyle(
-                fontSize: 13,
+                fontSize: 14,
                 fontStyle: FontStyle.italic,
+                color: Color(0xFFECE9E9),
+                height: 1.4,
               ),
               textAlign: TextAlign.center,
             ),
