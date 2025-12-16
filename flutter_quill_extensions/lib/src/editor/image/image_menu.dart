@@ -52,7 +52,14 @@ class ImageOptionsMenu extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.fromLTRB(50, 0, 50, 0),
       child: SimpleDialog(
-        title: Text(context.loc.image),
+        backgroundColor: _dialogBackgroundColor,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.zero,
+        ),
+        title: Text(
+          context.loc.image,
+          style: const TextStyle(color: _dialogTextColor),
+        ),
         children: [
           // 1. Añadir leyenda (first)
           if (!readOnly)
@@ -123,6 +130,9 @@ class ImageOptionsMenu extends StatelessWidget {
       context: context,
       builder: (dialogContext) => AlertDialog(
         backgroundColor: _dialogBackgroundColor,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.zero,
+        ),
         title: const Text(
           'Añadir leyenda',
           style: TextStyle(color: _dialogTextColor),
@@ -139,13 +149,15 @@ class ImageOptionsMenu extends StatelessWidget {
             fillColor: _dialogBackgroundColor,
             border: OutlineInputBorder(
               borderSide: BorderSide(color: _textFieldBorderColor),
+              borderRadius: BorderRadius.zero,
             ),
             enabledBorder: OutlineInputBorder(
               borderSide: BorderSide(color: _textFieldBorderColor),
+              borderRadius: BorderRadius.zero,
             ),
             focusedBorder: OutlineInputBorder(
               borderSide: BorderSide(color: _textFieldBorderColor, width: 1),
-              borderRadius: BorderRadius.all(Radius.circular(0)),
+              borderRadius: BorderRadius.zero,
             ),
           ),
           autofocus: true,
@@ -169,6 +181,9 @@ class ImageOptionsMenu extends StatelessWidget {
             style: ElevatedButton.styleFrom(
               backgroundColor: _addButtonBackgroundColor,
               foregroundColor: _addButtonTextColor,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(0),
+              ),
             ),
             child: const Text('Añadir'),
           ),
