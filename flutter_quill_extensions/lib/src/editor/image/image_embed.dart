@@ -57,7 +57,7 @@ class QuillEditorImageEmbedBuilder extends EmbedBuilder {
           Padding(
             padding: EdgeInsets.only(
               top: 8,
-              bottom: 24,
+              bottom: 16,
               left: screenWidth * 0.13,
               right: screenWidth * 0.13,
             ),
