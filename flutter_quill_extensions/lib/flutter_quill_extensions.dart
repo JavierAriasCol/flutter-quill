@@ -10,6 +10,8 @@ export 'src/editor/video/config/video_config.dart';
 export 'src/editor/video/config/video_web_config.dart';
 export 'src/editor/video/video_embed.dart';
 export 'src/editor/video/video_web_embed.dart';
+export 'src/editor/plaza_mention/config/plaza_mention_config.dart';
+export 'src/editor/plaza_mention/plaza_mention_embed.dart';
 export 'src/flutter_quill_embeds.dart';
 export 'src/toolbar/camera/camera_button.dart';
 export 'src/toolbar/camera/camera_types.dart';

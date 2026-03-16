@@ -3,6 +3,8 @@ import 'package:flutter_quill/flutter_quill.dart';
 
 import 'editor/image/config/image_config.dart';
 import 'editor/image/image_embed.dart';
+import 'editor/plaza_mention/config/plaza_mention_config.dart';
+import 'editor/plaza_mention/plaza_mention_embed.dart';
 import 'editor/video/config/video_config.dart';
 import 'editor/video/config/video_web_config.dart';
 import 'editor/video/video_embed.dart';
@@ -23,6 +25,8 @@ abstract final class FlutterQuillEmbeds {
         const QuillEditorImageEmbedConfig(),
     QuillEditorVideoEmbedConfig? videoEmbedConfig =
         const QuillEditorVideoEmbedConfig(),
+    PlazaMentionConfig? plazaMentionConfig =
+        const PlazaMentionConfig(),
   }) {
     return [
       if (imageEmbedConfig != null)
@@ -32,6 +36,10 @@ abstract final class FlutterQuillEmbeds {
       if (videoEmbedConfig != null)
         QuillEditorVideoEmbedBuilder(
           config: videoEmbedConfig,
+        ),
+      if (plazaMentionConfig != null)
+        QuillEditorPlazaMentionEmbedBuilder(
+          config: plazaMentionConfig,
         ),
     ];
   }
@@ -44,6 +52,8 @@ abstract final class FlutterQuillEmbeds {
         const QuillEditorImageEmbedConfig(),
     QuillEditorWebVideoEmbedConfig? videoEmbedConfig =
         const QuillEditorWebVideoEmbedConfig(),
+    PlazaMentionConfig? plazaMentionConfig =
+        const PlazaMentionConfig(),
   }) {
     if (!kIsWeb) {
       throw UnsupportedError(
@@ -59,6 +69,10 @@ abstract final class FlutterQuillEmbeds {
       if (videoEmbedConfig != null)
         QuillEditorWebVideoEmbedBuilder(
           config: videoEmbedConfig,
+        ),
+      if (plazaMentionConfig != null)
+        QuillEditorPlazaMentionEmbedBuilder(
+          config: plazaMentionConfig,
         ),
     ];
   }
