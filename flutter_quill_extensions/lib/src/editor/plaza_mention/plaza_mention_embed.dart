@@ -36,7 +36,7 @@ class QuillEditorPlazaMentionEmbedBuilder extends EmbedBuilder {
     return GestureDetector(
       onTap: () => config?.onPlazaTap?.call(plazaId),
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+        padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
         decoration: BoxDecoration(
           color: bgColor,
           borderRadius: BorderRadius.circular(0),
@@ -46,17 +46,17 @@ class QuillEditorPlazaMentionEmbedBuilder extends EmbedBuilder {
           children: [
             if (profileUrl != null && profileUrl.isNotEmpty)
               CircleAvatar(
-                radius: 12,
+                radius: 10,
                 backgroundImage: NetworkImage(profileUrl),
               ),
             if (profileUrl != null && profileUrl.isNotEmpty)
-              const SizedBox(width: 12),
+              const SizedBox(width: 6),
             Text(
               name,
               style: TextStyle(
                 color: txtColor,
                 fontWeight: FontWeight.w600,
-                fontSize: 16,
+                fontSize: 15,
               ),
             ),
           ],
