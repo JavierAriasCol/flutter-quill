@@ -22,52 +22,41 @@ class QuillEditorPlazaMentionEmbedBuilder extends EmbedBuilder {
   bool get expanded => false;
 
   @override
-  Widget build(
-    BuildContext context,
-    EmbedContext embedContext,
-  ) {
-    final data = jsonDecode(
-      embedContext.node.value.data as String,
-    ) as Map<String, dynamic>;
+  Widget build(BuildContext context, EmbedContext embedContext) {
+    final data =
+        jsonDecode(embedContext.node.value.data as String)
+            as Map<String, dynamic>;
     final name = data['name'] as String;
     final profileUrl = data['profileUrl'] as String?;
     final plazaId = data['id'] as String;
 
-    final bgColor = config?.backgroundColor ??
-        const Color(0x1A6750A4);
-    final txtColor = config?.textColor ??
-        const Color(0xFF6750A4);
+    final bgColor = config?.backgroundColor ?? const Color(0x1A6750A4);
+    final txtColor = config?.textColor ?? const Color(0xFF6750A4);
 
     return GestureDetector(
       onTap: () => config?.onPlazaTap?.call(plazaId),
       child: Container(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 8,
-          vertical: 2,
-        ),
+        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
         decoration: BoxDecoration(
           color: bgColor,
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(0),
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            if (profileUrl != null &&
-                profileUrl.isNotEmpty)
+            if (profileUrl != null && profileUrl.isNotEmpty)
               CircleAvatar(
-                radius: 8,
-                backgroundImage:
-                    NetworkImage(profileUrl),
+                radius: 12,
+                backgroundImage: NetworkImage(profileUrl),
               ),
-            if (profileUrl != null &&
-                profileUrl.isNotEmpty)
-              const SizedBox(width: 4),
+            if (profileUrl != null && profileUrl.isNotEmpty)
+              const SizedBox(width: 12),
             Text(
               name,
               style: TextStyle(
                 color: txtColor,
                 fontWeight: FontWeight.w600,
-                fontSize: 14,
+                fontSize: 16,
               ),
             ),
           ],
