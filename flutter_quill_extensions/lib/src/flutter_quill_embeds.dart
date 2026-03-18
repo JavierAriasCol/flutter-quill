@@ -5,6 +5,8 @@ import 'editor/image/config/image_config.dart';
 import 'editor/image/image_embed.dart';
 import 'editor/plaza_mention/config/plaza_mention_config.dart';
 import 'editor/plaza_mention/plaza_mention_embed.dart';
+import 'editor/post_mention/config/post_mention_config.dart';
+import 'editor/post_mention/post_mention_embed.dart';
 import 'editor/video/config/video_config.dart';
 import 'editor/video/config/video_web_config.dart';
 import 'editor/video/video_embed.dart';
@@ -27,6 +29,8 @@ abstract final class FlutterQuillEmbeds {
         const QuillEditorVideoEmbedConfig(),
     PlazaMentionConfig? plazaMentionConfig =
         const PlazaMentionConfig(),
+    PostMentionConfig? postMentionConfig =
+        const PostMentionConfig(),
   }) {
     return [
       if (imageEmbedConfig != null)
@@ -41,6 +45,10 @@ abstract final class FlutterQuillEmbeds {
         QuillEditorPlazaMentionEmbedBuilder(
           config: plazaMentionConfig,
         ),
+      if (postMentionConfig != null)
+        QuillEditorPostMentionEmbedBuilder(
+          config: postMentionConfig,
+        ),
     ];
   }
 
@@ -54,6 +62,8 @@ abstract final class FlutterQuillEmbeds {
         const QuillEditorWebVideoEmbedConfig(),
     PlazaMentionConfig? plazaMentionConfig =
         const PlazaMentionConfig(),
+    PostMentionConfig? postMentionConfig =
+        const PostMentionConfig(),
   }) {
     if (!kIsWeb) {
       throw UnsupportedError(
@@ -73,6 +83,10 @@ abstract final class FlutterQuillEmbeds {
       if (plazaMentionConfig != null)
         QuillEditorPlazaMentionEmbedBuilder(
           config: plazaMentionConfig,
+        ),
+      if (postMentionConfig != null)
+        QuillEditorPostMentionEmbedBuilder(
+          config: postMentionConfig,
         ),
     ];
   }
