@@ -8,7 +8,10 @@ class PostMentionConfig {
   const PostMentionConfig({
     this.cardBackgroundColor,
     this.titleColor,
+    this.titleFontSize,
+    this.titleFontFamily,
     this.subtitleColor,
+    this.subtitleFontSize,
     this.accentColor,
     this.onPostTap,
   });
@@ -19,8 +22,17 @@ class PostMentionConfig {
   /// Color for the post title text.
   final Color? titleColor;
 
+  /// Font size for the post title text.
+  final double? titleFontSize;
+
+  /// Font family for the post title text.
+  final String? titleFontFamily;
+
   /// Color for subtitle text (author + date).
   final Color? subtitleColor;
+
+  /// Font size for subtitle text (author + date).
+  final double? subtitleFontSize;
 
   /// Accent color for the left border.
   final Color? accentColor;

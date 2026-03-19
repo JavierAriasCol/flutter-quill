@@ -31,25 +31,19 @@ class QuillEditorPostMentionEmbedBuilder extends EmbedBuilder {
     final postId = data['id'] as String;
     final title = data['title'] as String;
     final authorName = data['authorName'] as String? ?? '';
-    final authorPhotoUrl =
-        data['authorPhotoUrl'] as String? ?? '';
+    final authorPhotoUrl = data['authorPhotoUrl'] as String? ?? '';
     final createdAtStr = data['createdAt'] as String? ?? '';
 
-    final bgColor = config?.cardBackgroundColor ??
-        const Color(0xFF201D1D);
-    final titleColor =
-        config?.titleColor ?? Colors.white;
-    final subtitleColor =
-        config?.subtitleColor ?? Colors.white70;
-    final accentColor =
-        config?.accentColor ?? const Color(0xFFFFCB74);
+    final bgColor = config?.cardBackgroundColor ?? const Color(0xFF201D1D);
+    final titleColor = config?.titleColor ?? Colors.white;
+    final subtitleColor = config?.subtitleColor ?? Colors.white70;
+    final accentColor = config?.accentColor ?? const Color(0xFFFFCB74);
 
     var formattedDate = '';
     if (createdAtStr.isNotEmpty) {
       try {
         final date = DateTime.parse(createdAtStr);
-        formattedDate = DateFormat('d MMM yyyy', 'es')
-            .format(date);
+        formattedDate = DateFormat('d MMM yyyy', 'es').format(date);
       } catch (_) {
         formattedDate = createdAtStr;
       }
@@ -62,13 +56,8 @@ class QuillEditorPostMentionEmbedBuilder extends EmbedBuilder {
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
           color: bgColor,
-          border: Border(
-            left: BorderSide(
-              color: accentColor,
-              width: 3,
-            ),
-          ),
-          borderRadius: BorderRadius.circular(4),
+          border: Border(left: BorderSide(color: accentColor, width: 3)),
+          borderRadius: BorderRadius.circular(0),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -78,8 +67,9 @@ class QuillEditorPostMentionEmbedBuilder extends EmbedBuilder {
               title,
               style: TextStyle(
                 color: titleColor,
+                fontFamily: config?.titleFontFamily,
                 fontWeight: FontWeight.w600,
-                fontSize: 15,
+                fontSize: config?.titleFontSize ?? 15,
                 height: 1.3,
               ),
               maxLines: 2,
@@ -91,22 +81,19 @@ class QuillEditorPostMentionEmbedBuilder extends EmbedBuilder {
                 if (authorPhotoUrl.isNotEmpty) ...[
                   CircleAvatar(
                     radius: 10,
-                    backgroundImage:
-                        NetworkImage(authorPhotoUrl),
+                    backgroundImage: NetworkImage(authorPhotoUrl),
                   ),
                   const SizedBox(width: 6),
                 ],
                 Expanded(
                   child: Text(
                     [
-                      if (authorName.isNotEmpty)
-                        authorName,
-                      if (formattedDate.isNotEmpty)
-                        formattedDate,
+                      if (authorName.isNotEmpty) authorName,
+                      if (formattedDate.isNotEmpty) formattedDate,
                     ].join('  ·  '),
                     style: TextStyle(
                       color: subtitleColor,
-                      fontSize: 12,
+                      fontSize: config?.subtitleFontSize ?? 12,
                       fontWeight: FontWeight.w400,
                     ),
                     maxLines: 1,
