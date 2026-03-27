@@ -23,8 +23,10 @@ class QuillEditorPlazaMentionEmbedBuilder extends EmbedBuilder {
 
   @override
   Widget build(BuildContext context, EmbedContext embedContext) {
-    final data =
-        jsonDecode(embedContext.node.value.data as String)
+    final rawData = embedContext.node.value.data;
+    final data = rawData is Map<String, dynamic>
+        ? rawData
+        : jsonDecode(rawData as String)
             as Map<String, dynamic>;
     final name = data['name'] as String;
     final profileUrl = data['profileUrl'] as String?;

@@ -25,8 +25,10 @@ class QuillEditorPostMentionEmbedBuilder extends EmbedBuilder {
 
   @override
   Widget build(BuildContext context, EmbedContext embedContext) {
-    final data =
-        jsonDecode(embedContext.node.value.data as String)
+    final rawData = embedContext.node.value.data;
+    final data = rawData is Map<String, dynamic>
+        ? rawData
+        : jsonDecode(rawData as String)
             as Map<String, dynamic>;
     final postId = data['id'] as String;
     final title = data['title'] as String;
