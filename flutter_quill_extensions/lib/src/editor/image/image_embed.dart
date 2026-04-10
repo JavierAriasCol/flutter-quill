@@ -97,13 +97,17 @@ class QuillEditorImageEmbedBuilder extends EmbedBuilder {
       },
       child: Builder(
         builder: (context) {
+          Widget child = Padding(
+            padding: const EdgeInsets.only(top: 12),
+            child: imageWithCaption,
+          );
           if (margin != null) {
-            return Padding(
+            child = Padding(
               padding: EdgeInsets.all(margin),
-              child: imageWithCaption,
+              child: child,
             );
           }
-          return imageWithCaption;
+          return child;
         },
       ),
     );
